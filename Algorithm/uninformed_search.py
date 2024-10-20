@@ -12,7 +12,7 @@ class Uninformed(ABC):
     @abstractmethod
     def search(self, grid_size, start, goals, obstacles):
         super().search(grid_size, start, goals, obstacles)
-    
+        
     # Backtracking the shortest path available
     def reconstruct_path_from_current_cell(self, cell_track, goal):
         current = goal

@@ -12,8 +12,7 @@ class Event(Interface):
 
     def handle_mouse_event(self, event, height, screen):
         x, y = event.pos
-        # Check if 'Start' button is clicked
-        if (10 <= x <= 90 and height - 90 <= y <= height - 60):
+        if (60 <= x <= 140 and height - 90 <= y <= height - 60):
             self.start_search(height, screen)
 
     def start_search(self, height, screen):
@@ -29,22 +28,20 @@ class Event(Interface):
                     self.wait_until_resumed(height)
 
                 self.handle_events(height)
-                self.visual.visualise_search(cell, screen)      #visualise cell expansion
-                pygame.display.flip()   # Update the display
-                pygame.time.delay(500)  # Slow down the visualization, delay by 500 milliseconds each step
+                self.visual.visualise_search(cell, screen)
+                pygame.display.flip()
+                pygame.time.delay(500)
 
-            if self.active:             # If the search was not stopped, after showing the expanded cells, highlight the final path
-                self.visual.highlight_final_path(screen)    #highlight the path to goal after finishing search
+            if self.active:
+                self.visual.highlight_final_path(screen)
 
     def handle_events(self, height):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                #handle stop button
-                if 310 <= x <= 390 and height - 90 <= y <= height - 60:
-                    self.active = False     #reset everything
-                #handle pause button
-                elif 610 <= x <= 690 and height - 90 <= y <= height - 60:
+                if 360 <= x <= 440 and height - 90 <= y <= height - 60:
+                    self.active = False
+                elif 660 <= x <= 740 and height - 90 <= y <= height - 60:
                     self.paused = True
 
 
@@ -53,10 +50,8 @@ class Event(Interface):
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
-                    #if resume button is pressed
-                    if 910 <= x <= 990 and height - 90 <= y <= height - 60:  # Check if 'Resume' button is clicked
+                    if 960 <= x <= 1040 and height - 90 <= y <= height - 60:
                         self.paused = False
-                    #if stop button is pressed
-                    if 310 <= x <= 390 and height - 90 <= y <= height - 60:  # Optionally allow stopping during pause
+                    if 360 <= x <= 440 and height - 90 <= y <= height - 60:
                         self.active = False 
                         self.paused = False

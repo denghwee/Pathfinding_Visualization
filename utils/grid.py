@@ -11,10 +11,10 @@ class Grid(Interface):
         for i in range(self.grid_size[1]):
             for j in range(self.grid_size[0]):
                 color = self.determine_cell_color((i, j))
-                pygame.draw.rect(screen, color, (i * (self.cell_size) + self.thick, j * (self.cell_size) + self.thick, self.cell_size - self.thick*2, self.cell_size - self.thick*2))
+                pygame.draw.rect(screen, color, (i * (self.cell_size) + self.thick, j * (self.cell_size) + self.thick, self.cell_size - self.thick*2, self.cell_size - self.thick*2), border_radius=5)
                 
                 if self.strategy.informed:
-                    self.label_cell((i,j), screen)
+                    self.informed_cell((i,j), screen)
 
     def determine_cell_color(self, cell):
         if cell == self.start:
@@ -35,7 +35,7 @@ class Grid(Interface):
         x, y = cell
         heuristic_val = self.strategy.heuristic(cell, self.strategy.find_closest_goal(cell, self.goals))
         
-        font = pygame.font.Font(None, 24)
+        font = pygame.font.Font(FONT, 12)
         heuristic_text = font.render(f"h(n): {heuristic_val}", True, "black")
         screen.blit(heuristic_text, ((x + 0.3) * self.cell_size, (y + 0.1) * self.cell_size))
         

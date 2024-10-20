@@ -11,15 +11,16 @@ def main(filename, method):
     try:
         grid, start, goal, obstacles = load_file(filename)
     except:
-        print("File's format or dir error!")
+        print('File\'s format or dir error!')
 
-    if method.lower() == "bfs":
-        pass
-        # strategy = BFS()
-    elif method.lower() == "dfs":
+    if method.lower() == 'dfs':
         strategy = DFS()
+    elif method.lower() == 'bfs':
+        strategy = BFS()
+    elif method.lower() == 'as':
+        strategy = AS()
     else:
-        print("Invalid pathfinding method. Please use the available algorithms, such as: 'bfs', 'dfs'.")
+        print('Invalid pathfinding method. Please use the available algorithms, such as: \'bfs\', \'dfs\'.')
         return
 
     agent = Agent(strategy)
@@ -41,8 +42,8 @@ def main(filename, method):
     GUI_instance.run()
     
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print("Usage: python search.py <filename> <method>")
+        print('Usage: python search.py <filename> <method>')
     else:
         main(sys.argv[1], sys.argv[2])

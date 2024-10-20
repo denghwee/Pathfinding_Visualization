@@ -21,4 +21,4 @@ class Informed(Uninformed):
         return self.closest_goal
     
     def heuristic(self, cell, goal):
-        return abs(goal[0] - cell[0]) + abs(goal[1] - cell[1])
+        return abs(cell[0] - goal[0]) + abs(cell[1] - goal[1])
